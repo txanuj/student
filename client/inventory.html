@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventory - Inventory Management System</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo">📦 Inventory System</div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Dashboard</a></li>
+                    <li><a href="inventory.html" class="active">Inventory</a></li>
+                    <li><a href="requests.html">Requests</a></li>
+                    <li><a href="forecast.html">AI Forecast</a></li>
+                    <li><a href="analytics.html">Analytics</a></li>
+                </ul>
+            </nav>
+            <div class="user-info">
+                <span class="user-badge" id="userBadge"></span>
+                <button class="btn btn-secondary btn-sm" onclick="logout()">Logout</button>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="flex-between mb-2">
+            <h1>Inventory Management</h1>
+            <button class="btn btn-primary" id="addItemBtn" style="display: none;">+ Add Item</button>
+        </div>
+
+        <!-- Search and Filter -->
+        <div class="search-bar">
+            <input type="text" id="searchInput" class="search-input" placeholder="Search items...">
+            <select id="categoryFilter">
+                <option value="">All Categories</option>
+            </select>
+            <select id="statusFilter">
+                <option value="">All Status</option>
+                <option value="normal">Normal</option>
+                <option value="low">Low Stock</option>
+                <option value="critical">Critical</option>
+                <option value="overstocked">Overstocked</option>
+            </select>
+        </div>
+
+        <!-- Items Table -->
+        <div class="card">
+            <div class="card-body">
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Category</th>
+                                <th>Department</th>
+                                <th>Quantity</th>
+                                <th>Location</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="itemsTable">
+                            <tr>
+                                <td colspan="7" style="text-align: center;">Loading...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add/Edit Item Modal -->
+    <div id="itemModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="modalTitle">Add Item</h2>
+                <button class="close-btn" onclick="closeModal()">&times;</button>
+            </div>
+            <form id="itemForm">
+                <input type="hidden" id="itemId">
+                <div class="form-group">
+                    <label for="itemName">Item Name *</label>
+                    <input type="text" id="itemName" required>
+                </div>
+                <div class="form-group">
+                    <label for="itemCategory">Category *</label>
+                    <input type="text" id="itemCategory" required>
+                </div>
+                <div class="form-group">
+                    <label for="itemDepartment">Department *</label>
+                    <select id="itemDepartment" required>
+                        <option value="Lab">Lab</option>
+                        <option value="Library">Library</option>
+                        <option value="Sports">Sports</option>
+                        <option value="Hostel">Hostel</option>
+                        <option value="Admin">Admin</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="itemQuantity">Quantity *</label>
+                    <input type="number" id="itemQuantity" min="0" required>
+                </div>
+                <div class="form-group">
+                    <label for="itemLocation">Location *</label>
+                    <input type="text" id="itemLocation" required>
+                </div>
+                <div class="form-group">
+                    <label for="itemMinStock">Min Stock Level</label>
+                    <input type="number" id="itemMinStock" min="0" value="10">
+                </div>
+                <div class="form-group">
+                    <label for="itemMaxStock">Max Stock Level</label>
+                    <input type="number" id="itemMaxStock" min="0" value="100">
+                </div>
+                <div class="form-group">
+                    <label for="itemDescription">Description</label>
+                    <textarea id="itemDescription" rows="3"></textarea>
+                </div>
+                <div class="flex gap-1">
+                    <button type="submit" class="btn btn-primary">Save Item</button>
+                    <button type="button" class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/auth.js"></script>
+    <script src="js/inventory.js"></script>
+</body>
+
+</html>

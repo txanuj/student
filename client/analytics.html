@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analytics - Inventory Management System</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo">📦 Inventory System</div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Dashboard</a></li>
+                    <li><a href="inventory.html">Inventory</a></li>
+                    <li><a href="requests.html">Requests</a></li>
+                    <li><a href="forecast.html">AI Forecast</a></li>
+                    <li><a href="analytics.html" class="active">Analytics</a></li>
+                </ul>
+            </nav>
+            <div class="user-info">
+                <span class="user-badge" id="userBadge"></span>
+                <button class="btn btn-secondary btn-sm" onclick="logout()">Logout</button>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="flex-between mb-2">
+            <h1>📊 Analytics & Reports</h1>
+            <div class="flex gap-1">
+                <button class="btn btn-primary" onclick="exportItems()">Export Items CSV</button>
+                <button class="btn btn-primary" onclick="exportRequests()">Export Requests CSV</button>
+            </div>
+        </div>
+
+        <!-- Charts -->
+        <div class="grid grid-2 mb-2">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Department Distribution</h2>
+                </div>
+                <div class="card-body">
+                    <canvas id="departmentChart"></canvas>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Category Analysis</h2>
+                </div>
+                <div class="card-body">
+                    <canvas id="categoryChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Monthly Usage -->
+        <div class="card mb-2">
+            <div class="card-header">
+                <h2 class="card-title">Monthly Usage Report</h2>
+            </div>
+            <div class="card-body">
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Item</th>
+                                <th>Category</th>
+                                <th>Department</th>
+                                <th>Current Stock</th>
+                                <th>Monthly Usage</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="monthlyUsageTable">
+                            <tr>
+                                <td colspan="6" style="text-align: center;">Loading...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/auth.js"></script>
+    <script src="js/analytics.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - Inventory Management System</title>
+  <link rel="stylesheet" href="css/login.css">
+</head>
+<body>
+  <div class="login-container">
+    <div class="login-header">
+      <h1>📦 Inventory System</h1>
+      <p>AI-Powered Inventory Management</p>
+    </div>
+
+    <div id="errorMessage" class="error-message"></div>
+
+    <form id="loginForm">
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input 
+          type="email" 
+          id="email" 
+          name="email" 
+          placeholder="Enter your email"
+          required
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input 
+          type="password" 
+          id="password" 
+          name="password" 
+          placeholder="Enter your password"
+          required
+        >
+      </div>
+
+      <button type="submit" class="btn-login">Sign In</button>
+    </form>
+
+    <div class="demo-credentials">
+      <h3>🔑 Demo Credentials</h3>
+      <p><strong>Admin:</strong> <code>admin@college.edu</code> / <code>admin123</code></p>
+      <p><strong>Lab Staff:</strong> <code>lab@college.edu</code> / <code>lab123</code></p>
+      <p><strong>Library:</strong> <code>library@college.edu</code> / <code>library123</code></p>
+      <p><strong>Sports:</strong> <code>sports@college.edu</code> / <code>sports123</code></p>
+      <p><strong>Hostel:</strong> <code>hostel@college.edu</code> / <code>hostel123</code></p>
+    </div>
+  </div>
+
+  <script src="js/auth.js"></script>
+  <script>
+    document.getElementById('loginForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      const errorMessage = document.getElementById('errorMessage');
+      
+      try {
+        const response = await fetch('/api/auth/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ email, password })
+        });
+        
+        const data = await response.json();
+        
+        if (response.ok) {
+          // Store token and user info
+          localStorage.setItem('token', data.token);
+          localStorage.setItem('user', JSON.stringify(data.user));
+          
+          // Redirect to dashboard
+          window.location.href = '/index.html';
+        } else {
+          errorMessage.textContent = data.error || 'Login failed';
+          errorMessage.classList.add('show');
+          
+          setTimeout(() => {
+            errorMessage.classList.remove('show');
+          }, 3000);
+        }
+      } catch (error) {
+        errorMessage.textContent = 'Network error. Please try again.';
+        errorMessage.classList.add('show');
+        
+        setTimeout(() => {
+          errorMessage.classList.remove('show');
+        }, 3000);
+      }
+    });
+  </script>
+</body>
+</html>

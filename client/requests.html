@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Requests - Inventory Management System</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo">📦 Inventory System</div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Dashboard</a></li>
+                    <li><a href="inventory.html">Inventory</a></li>
+                    <li><a href="requests.html" class="active">Requests</a></li>
+                    <li><a href="forecast.html">AI Forecast</a></li>
+                    <li><a href="analytics.html">Analytics</a></li>
+                </ul>
+            </nav>
+            <div class="user-info">
+                <span class="user-badge" id="userBadge"></span>
+                <button class="btn btn-secondary btn-sm" onclick="logout()">Logout</button>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="flex-between mb-2">
+            <h1>Request Management</h1>
+            <button class="btn btn-primary" onclick="openRequestModal()">+ New Request</button>
+        </div>
+
+        <!-- Filter -->
+        <div class="search-bar">
+            <select id="statusFilter">
+                <option value="">All Status</option>
+                <option value="pending">Pending</option>
+                <option value="approved">Approved</option>
+                <option value="rejected">Rejected</option>
+            </select>
+        </div>
+
+        <!-- Requests Table -->
+        <div class="card">
+            <div class="card-body">
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Item</th>
+                                <th>Quantity</th>
+                                <th>Requester</th>
+                                <th>Department</th>
+                                <th>Status</th>
+                                <th>Date</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="requestsTable">
+                            <tr>
+                                <td colspan="7" style="text-align: center;">Loading...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- New Request Modal -->
+    <div id="requestModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">New Request</h2>
+                <button class="close-btn" onclick="closeRequestModal()">&times;</button>
+            </div>
+            <form id="requestForm">
+                <div class="form-group">
+                    <label for="requestItem">Item *</label>
+                    <select id="requestItem" required></select>
+                </div>
+                <div class="form-group">
+                    <label for="requestQuantity">Quantity *</label>
+                    <input type="number" id="requestQuantity" min="1" required>
+                </div>
+                <div class="form-group">
+                    <label for="requestReason">Reason</label>
+                    <textarea id="requestReason" rows="3"></textarea>
+                </div>
+                <div class="flex gap-1">
+                    <button type="submit" class="btn btn-primary">Submit Request</button>
+                    <button type="button" class="btn btn-secondary" onclick="closeRequestModal()">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Approval Modal -->
+    <div id="approvalModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="approvalTitle">Approve Request</h2>
+                <button class="close-btn" onclick="closeApprovalModal()">&times;</button>
+            </div>
+            <form id="approvalForm">
+                <input type="hidden" id="approvalRequestId">
+                <input type="hidden" id="approvalAction">
+                <div class="form-group">
+                    <label for="approvalNotes">Notes</label>
+                    <textarea id="approvalNotes" rows="3"></textarea>
+                </div>
+                <div class="flex gap-1">
+                    <button type="submit" class="btn btn-primary" id="approvalBtn">Confirm</button>
+                    <button type="button" class="btn btn-secondary" onclick="closeApprovalModal()">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/auth.js"></script>
+    <script src="js/requests.js"></script>
+</body>
+
+</html>

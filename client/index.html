@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Inventory Management System</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo">📦 Inventory System</div>
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="index.html" class="active">Dashboard</a></li>
+                    <li><a href="inventory.html">Inventory</a></li>
+                    <li><a href="requests.html">Requests</a></li>
+                    <li><a href="forecast.html">AI Forecast</a></li>
+                    <li><a href="analytics.html">Analytics</a></li>
+                </ul>
+            </nav>
+            <div class="user-info">
+                <span class="user-badge" id="userBadge"></span>
+                <button class="btn btn-secondary btn-sm" onclick="logout()">Logout</button>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <h1 style="margin-bottom: 2rem;">Dashboard</h1>
+
+        <!-- Stats Grid -->
+        <div class="stats-grid" id="statsGrid">
+            <div class="stat-card">
+                <div class="stat-label">Total Items</div>
+                <div class="stat-value" id="totalItems">-</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Low Stock Items</div>
+                <div class="stat-value" id="lowStockItems">-</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Pending Requests</div>
+                <div class="stat-value" id="pendingRequests">-</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">At Risk Items</div>
+                <div class="stat-value" id="atRiskItems">-</div>
+            </div>
+        </div>
+
+        <!-- Main Content Grid -->
+        <div class="grid grid-2">
+            <!-- Recent Items -->
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Recent Items</h2>
+                    <a href="inventory.html" class="btn btn-primary btn-sm">View All</a>
+                </div>
+                <div class="card-body">
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Category</th>
+                                    <th>Stock</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="recentItemsTable">
+                                <tr>
+                                    <td colspan="4" style="text-align: center;">Loading...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Requests -->
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Recent Requests</h2>
+                    <a href="requests.html" class="btn btn-primary btn-sm">View All</a>
+                </div>
+                <div class="card-body">
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Item</th>
+                                    <th>Quantity</th>
+                                    <th>Status</th>
+                                    <th>Date</th>
+                                </tr>
+                            </thead>
+                            <tbody id="recentRequestsTable">
+                                <tr>
+                                    <td colspan="4" style="text-align: center;">Loading...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Charts -->
+        <div class="grid grid-2 mt-2">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Stock Distribution</h2>
+                </div>
+                <div class="card-body">
+                    <canvas id="stockChart"></canvas>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Request Status</h2>
+                </div>
+                <div class="card-body">
+                    <canvas id="requestChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/auth.js"></script>
+    <script src="js/dashboard.js"></script>
+</body>
+
+</html>

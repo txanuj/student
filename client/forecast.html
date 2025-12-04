@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Forecast - Inventory Management System</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo">📦 Inventory System</div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Dashboard</a></li>
+                    <li><a href="inventory.html">Inventory</a></li>
+                    <li><a href="requests.html">Requests</a></li>
+                    <li><a href="forecast.html" class="active">AI Forecast</a></li>
+                    <li><a href="analytics.html">Analytics</a></li>
+                </ul>
+            </nav>
+            <div class="user-info">
+                <span class="user-badge" id="userBadge"></span>
+                <button class="btn btn-secondary btn-sm" onclick="logout()">Logout</button>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <h1 class="mb-2">🤖 AI-Powered Forecasting</h1>
+
+        <!-- Stats -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-label">Items at Risk</div>
+                <div class="stat-value" id="atRiskCount">-</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Critical Items</div>
+                <div class="stat-value" id="criticalCount">-</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Avg Daily Usage</div>
+                <div class="stat-value" id="avgUsage">-</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Reorder Needed</div>
+                <div class="stat-value" id="reorderCount">-</div>
+            </div>
+        </div>
+
+        <!-- At Risk Items -->
+        <div class="card mb-2">
+            <div class="card-header">
+                <h2 class="card-title">⚠️ Items at Risk</h2>
+            </div>
+            <div class="card-body">
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Item</th>
+                                <th>Current Stock</th>
+                                <th>Daily Usage</th>
+                                <th>Days Until Stockout</th>
+                                <th>Risk Level</th>
+                                <th>Recommendation</th>
+                            </tr>
+                        </thead>
+                        <tbody id="atRiskTable">
+                            <tr>
+                                <td colspan="6" style="text-align: center;">Loading...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Top Used Items -->
+        <div class="card">
+            <div class="card-header">
+                <h2 class="card-title">📈 Top Used Items</h2>
+            </div>
+            <div class="card-body">
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Item</th>
+                                <th>Category</th>
+                                <th>Current Stock</th>
+                                <th>7-Day Usage</th>
+                                <th>30-Day Usage</th>
+                                <th>Trend</th>
+                            </tr>
+                        </thead>
+                        <tbody id="topUsedTable">
+                            <tr>
+                                <td colspan="6" style="text-align: center;">Loading...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/auth.js"></script>
+    <script src="js/forecast.js"></script>
+</body>
+
+</html>
